@@ -5,14 +5,40 @@
         <nav th:replace="/fragments/navbar :: navbar"></nav>
         <div class="container">
             <div>
+                <h1>POST</h1>
                 <p th:text="${theme.getThemeTitle()}"></p>
                 <p th:text="${theme.getCreationDate()}"></p>
                 <p th:text="${theme.getDescription()}"></p>
             </div>
-            <div>
-                <p>
 
-                </p>
+            <div class="comments">
+                <div class="create-comment-div">
+                    <form method="post" th:action="@{/theme/{title}(title=${theme.getThemeTitle()})}">
+                        <textarea name="new-comment-text" placeholder="New comment"></textarea>
+                        <button type="submit">
+                            Add comment
+                        </button>
+                    </form>
+                </div>
+
+                <h1>Comments</h1>
+                <ul>
+                    <li th:each="comment : ${comments}">
+                        <div>
+                            <div class="comment-title">
+                                <p class="title" th:text="${theme.getThemeTitle()}"></p>
+                                <p class="author" th:text="${comment.getAuthor()}"></p>
+                                <p class="date" th:text="${comment.getDate()}"></p>
+                            </div>
+                            <div class="comment-text">
+                                <p class="inner-comment-text" th:text="${comment.getComment()}"></p>
+                            </div>
+                            <div class="comment-footer">
+                                <a href="#">reply</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </body>

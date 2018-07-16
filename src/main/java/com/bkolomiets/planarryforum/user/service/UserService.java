@@ -18,7 +18,7 @@ public class UserService {
 
     public void addUser(final User user) {
         List<User> users = userRepository.findAll();
-        Stream<User> userStream = users.stream().filter(user1 -> user1.getUserName().equalsIgnoreCase(user.getUserName())
+        Stream<User> userStream = users.stream().filter(user1 -> user1.getUsername().equalsIgnoreCase(user.getUsername())
                                                               && user1.getPassword().equalsIgnoreCase(user.getPassword())
                                                               && user1.getEmail().equalsIgnoreCase(user.getEmail())
         );

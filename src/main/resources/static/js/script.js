@@ -1,23 +1,17 @@
 $(document).ready(function(){
-    getLoginForm();
     isEmptyRegInputs();
+    isEmptyLogInputsModal();
     isEmptyLogInputs();
 });
 
-function getLoginForm() {
-    $('#login').on('click', function () {
-        $('#login').attr('data-toggle', 'modal');
-    });
-}
-
 function isEmptyRegInputs() {
     $('#regBtn').on('click', function () {
-        var login = $("[name = 'loginReg']").val();
+        var username = $("[name = 'loginReg']").val();
         var email = $("[name = 'emailReg']").val();
         var pass = $("[name = 'passwordReg']").val();
         var pass2 = $("[name = 'password2Reg']").val();
 
-        if (login.trim() === '') {
+        if (username.trim() === '') {
             $('.modal-content-p').text('Pls, enter the login!');
         } else if (email.trim() === '') {
             $('.modal-content-p').text('Pls, enter the email!');
@@ -35,19 +29,36 @@ function isEmptyRegInputs() {
     })
 }
 
-function isEmptyLogInputs() {
-    $('#logBtn').on('click', function () {
-        var login = $("[name = 'login']").val();
-        var pass = $("[name = 'password']").val();
+function isEmptyLogInputsModal() {
+    $('#logBtnModal').on('click', function () {
+        var username = $(".login-input-modal").val();
+        var pass = $(".password-input-modal").val();
 
         $('.forLoginMessage').text('');
         $('.forPasswordMessage').text('');
 
-        if (login.trim() === '') {
+        if (username.trim() === '') {
             $('.forLoginMessage').text('You must enter the login');
         } else if (pass.trim() === '') {
             $('.forPasswordMessage').text('You must enter the password');
         } else {
+            $('#logBtnModal').attr('type', 'submit');
+        }
+    });
+}
+
+function isEmptyLogInputs() {
+    $('#logBtn').on('click', function () {
+        var username = $(".login-input").val();
+        var pass = $(".password-input").val();
+
+        if (username.trim() === '') {
+            $('.modal-content-p').text('Pls, enter the login!');
+        } else if (pass.trim() === '') {
+            $('.modal-content-p').text('Pls, enter the password!');
+        } else {
+            $('#logBtn').attr('data-toggle', '');
+            $('#logBtn').attr('data-target', '');
             $('#logBtn').attr('type', 'submit');
         }
     });

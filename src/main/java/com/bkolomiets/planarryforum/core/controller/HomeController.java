@@ -1,7 +1,6 @@
 package com.bkolomiets.planarryforum.core.controller;
 
 import com.bkolomiets.planarryforum.core.service.HomeService;
-import com.bkolomiets.planarryforum.theme.service.ThemeService;
 import com.bkolomiets.planarryforum.user.domain.User;
 import com.bkolomiets.planarryforum.user.role.Role;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,6 @@ import java.util.Collections;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class HomeController {
     private final HomeService homeService;
-    private final ThemeService themeService;
 
     @GetMapping
     public String home() {
@@ -31,7 +29,8 @@ public class HomeController {
 
     @GetMapping("/registration")
     public String registration(final Model model) {
-        model.addAttribute("nav", themeService.getNavBarByRole());
+        model.addAttribute("nav", homeService.getNavBarByRole());
+        model.addAttribute("isLogged", homeService.getLogButtonByRole());
 
         return "registration";
     }
@@ -41,6 +40,7 @@ public class HomeController {
                                  , @RequestParam("passwordReg") final String password
                                  , @RequestParam("emailReg") final String email) {
         User user = new User(login, password, email);
+        user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
 
         homeService.addUser(user);
@@ -50,15 +50,9 @@ public class HomeController {
 
     @GetMapping("/login")
     public String login(final Model model) {
-        model.addAttribute("nav", themeService.getNavBarByRole());
+        model.addAttribute("nav", homeService.getNavBarByRole());
+        model.addAttribute("isLogged", homeService.getLogButtonByRole());
 
         return "login";
-    }
-
-    @PostMapping("/login")
-    public String postLogin(@RequestParam("login") final String login
-                          , @RequestParam("password") final String password) {
-
-        return "redirect:/theme/all";
     }
 }

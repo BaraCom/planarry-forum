@@ -1,15 +1,15 @@
 package com.bkolomiets.planarryforum.theme.controller;
 
+import com.bkolomiets.planarryforum.comment.domain.Comment;
+import com.bkolomiets.planarryforum.comment.service.CommentService;
+import com.bkolomiets.planarryforum.core.service.HomeService;
 import com.bkolomiets.planarryforum.theme.domain.Theme;
 import com.bkolomiets.planarryforum.theme.service.ThemeService;
-import com.bkolomiets.planarryforum.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -20,30 +20,47 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ThemeController {
     private final ThemeService themeService;
+    private final HomeService homeService;
+    private final CommentService commentService;
 
     @GetMapping("/all")
     public String all(final Model model) {
         List<Theme> allThemes = themeService.getAll();
         model.addAttribute("themes", allThemes);
-        model.addAttribute("nav", themeService.getNavBarByRole());
+        model.addAttribute("nav", homeService.getNavBarByRole());
+        model.addAttribute("isLogged", homeService.getLogButtonByRole());
 
         return "all-themes";
     }
 
     @GetMapping("/{title}")
     public String getThemeByTitle(@PathVariable("title") final String title
-                                , @AuthenticationPrincipal final User user
-                                , final Model model) {
+                                                       , final Model model) {
+        model.addAttribute("nav", homeService.getNavBarByRole());
+        model.addAttribute("isLogged", homeService.getLogButtonByRole());
+
         Theme theme = themeService.getByTitle(title);
         model.addAttribute("theme", theme);
-        model.addAttribute("nav", themeService.getNavBarByRole());
+
+        List<Comment> comment = commentService.getByTheme(theme);
+        model.addAttribute("comments", comment);
 
         return "concrete-theme";
     }
 
+    @PostMapping("/{title}")
+    public String addNewComment(@PathVariable("title") final String title
+                              , @RequestParam("new-comment-text") final String newComment
+                              , final Model model) {
+        commentService.addNewComment(title, newComment);
+
+        return getThemeByTitle(title, model);
+    }
+
     @GetMapping("/add")
     public String getAdd(final Model model) {
-        model.addAttribute("nav", themeService.getNavBarByRole());
+        model.addAttribute("nav", homeService.getNavBarByRole());
+        model.addAttribute("isLogged", homeService.getLogButtonByRole());
 
         return "add-theme";
     }
@@ -51,7 +68,7 @@ public class ThemeController {
     @PostMapping("/add")
     public String postAdd(@RequestParam(name = "title") final String title
                         , @RequestParam(name = "description") final String description) {
-        themeService.addTheme(new Theme(title, description, LocalDate.now().toString()));
+        themeService.addTheme(title, description);
 
         return "redirect:/theme/all";
     }

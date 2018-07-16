@@ -1,5 +1,6 @@
 package com.bkolomiets.planarryforum.theme.domain;
 
+import com.bkolomiets.planarryforum.user.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,4 +32,8 @@ public class Theme {
 
     @Column(name = "date")
     private String creationDate;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
