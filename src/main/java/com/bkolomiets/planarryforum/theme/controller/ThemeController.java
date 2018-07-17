@@ -42,8 +42,8 @@ public class ThemeController {
         Theme theme = themeService.getByTitle(title);
         model.addAttribute("theme", theme);
 
-        List<Comment> comment = commentService.getByTheme(theme);
-        model.addAttribute("comments", comment);
+        List<Comment> comments = commentService.getByTheme(theme);
+        model.addAttribute("comments", comments);
 
         return "concrete-theme";
     }
@@ -52,7 +52,22 @@ public class ThemeController {
     public String addNewComment(@PathVariable("title") final String title
                               , @RequestParam("new-comment-text") final String newComment
                               , final Model model) {
+
+
         commentService.addNewComment(title, newComment);
+
+        return getThemeByTitle(title, model);
+    }
+
+    @PostMapping("/{title}/{id}")
+    public String addNewReplyComment(@PathVariable("title") final String title
+                                   , @PathVariable("id") final String id
+                                   , @RequestParam("new-reply-comment") final String newReplyComment
+                                   , final Model model) {
+
+        if (!newReplyComment.equals("")) {
+            commentService.addNewReplyComment(title, newReplyComment, id);
+        }
 
         return getThemeByTitle(title, model);
     }

@@ -14,6 +14,7 @@
             <div class="comments">
                 <div class="create-comment-div">
                     <form method="post" th:action="@{/theme/{title}(title=${theme.getThemeTitle()})}">
+                        <!--<input type="hidden" name="hidden-comment-input" th:value="${}">-->
                         <textarea name="new-comment-text" placeholder="New comment"></textarea>
                         <button type="submit">
                             Add comment
@@ -34,7 +35,17 @@
                                 <p class="inner-comment-text" th:text="${comment.getComment()}"></p>
                             </div>
                             <div class="comment-footer">
-                                <a href="#">reply</a>
+                                <button class="reply-btn" th:id="${comment.getId()}">reply</button>
+                            </div>
+                            <div class="reply-comment-div">
+                                <form th:name="${comment.getId()}" class="reply-form" th:id="${comment.getId()}" style="display:none;"
+                                      method="post" th:action="@{/theme/{title}/{id}(title=${theme.getThemeTitle()}, id=${comment.getId()})}">
+                                    <!--<input type="hidden" name="hidden-reply-id" th:value="${comment.getId()}">-->
+                                    <textarea name="new-reply-comment" class="reply-comment"></textarea>
+                                    <button type="submit">
+                                        Add comment
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </li>

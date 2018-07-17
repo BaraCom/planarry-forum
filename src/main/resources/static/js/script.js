@@ -2,6 +2,7 @@ $(document).ready(function(){
     isEmptyRegInputs();
     isEmptyLogInputsModal();
     isEmptyLogInputs();
+    getReplyForm();
 });
 
 function isEmptyRegInputs() {
@@ -61,5 +62,15 @@ function isEmptyLogInputs() {
             $('#logBtn').attr('data-target', '');
             $('#logBtn').attr('type', 'submit');
         }
+    });
+}
+
+function getReplyForm() {
+    $('.reply-btn').on('click', function () {
+        $('.reply-form').attr('style', 'display:none');
+
+        var idValue = $(this).attr('id');
+
+        $("[name = '" + idValue +"']").attr('style', 'display:visible');
     });
 }

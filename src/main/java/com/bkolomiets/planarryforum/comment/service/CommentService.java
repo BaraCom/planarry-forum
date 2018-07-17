@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,14 +27,45 @@ public class CommentService {
         String name = homeService.getCurrentUserName();
         Theme theme = themeService.getByTitle(title);
 
-        Comment newComment = new Comment(0L, name, date, comment);
+        Comment newComment = new Comment(0L, name, date, comment,null);
+        newComment.setTheme(theme);
+
+        commentRepository.save(newComment);
+    }
+
+    public void addNewReplyComment(final String title, final String comment, final String id) {
+        String date = LocalDate.now().toString();
+        String name = homeService.getCurrentUserName();
+        Theme theme = themeService.getByTitle(title);
+
+        Comment commentById = commentRepository.findById(Long.valueOf(id)).get();
+        Long levelId = commentById.getLevelId();
+
+        Comment newComment = new Comment(++levelId, name, date, comment, Long.valueOf(id));
         newComment.setTheme(theme);
 
         commentRepository.save(newComment);
     }
 
     public List<Comment> getByTheme(final Theme theme) {
+        List<Comment> byTheme = commentRepository.findByTheme(theme);
+        List<Comment> sortedComments = new ArrayList<>();
 
-        return commentRepository.findByTheme(theme);
+        for (Comment parentComment : byTheme) {
+            if (parentComment.getLevelId() == 0L) {
+                sortedComments.add(parentComment);
+                Long count = parentComment.getId();
+
+                for (int i = 1; i < 3; i++) {
+                    for (Comment childComment : byTheme) {
+                        if (childComment.getLevelId() == i && childComment.getParentId().equals(count)) {
+                            count = childComment.getId();
+                            sortedComments.add(childComment);
+                        }
+                    }
+                }
+            }
+        }
+        return sortedComments;
     }
 }

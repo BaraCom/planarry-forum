@@ -14,11 +14,12 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 public class Comment {
-    public Comment(Long levelId, String author, String date, String comment) {
+    public Comment(Long levelId, String author, String date, String comment, Long parentId) {
         this.levelId = levelId;
         this.author = author;
         this.date = date;
         this.comment = comment;
+        this.parentId = parentId;
     }
 
     @Id
@@ -27,6 +28,9 @@ public class Comment {
 
     @Column(name = "level_id")
     private Long levelId;
+
+    @Column(name = "parent_id", nullable = true)
+    private Long parentId;
 
     @ManyToOne
     @JoinColumn(name = "theme_id")
