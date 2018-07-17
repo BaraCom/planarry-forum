@@ -22,6 +22,8 @@ public class CommentService {
     private final ThemeService themeService;
     private final HomeService homeService;
 
+    private final static Long DEPTH_NESTING = 1L;
+
     public void addNewComment(final String title, final String comment) {
         String date = LocalDate.now().toString();
         String name = homeService.getCurrentUserName();
@@ -44,7 +46,9 @@ public class CommentService {
         Comment newComment = new Comment(++levelId, name, date, comment, Long.valueOf(id));
         newComment.setTheme(theme);
 
-        commentRepository.save(newComment);
+        if (newComment.getLevelId() <= DEPTH_NESTING) {
+            commentRepository.save(newComment);
+        }
     }
 
     public List<Comment> getByTheme(final Theme theme) {
@@ -56,9 +60,9 @@ public class CommentService {
                 sortedComments.add(parentComment);
                 Long count = parentComment.getId();
 
-                for (int i = 1; i < 3; i++) {
+                for (int i = 0; i < DEPTH_NESTING; i++) {
                     for (Comment childComment : byTheme) {
-                        if (childComment.getLevelId() == i && childComment.getParentId().equals(count)) {
+                        if (childComment.getLevelId() == (i + 1) && childComment.getParentId().equals(count)) {
                             count = childComment.getId();
                             sortedComments.add(childComment);
                         }
