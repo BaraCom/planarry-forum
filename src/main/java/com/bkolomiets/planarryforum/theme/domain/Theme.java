@@ -1,10 +1,13 @@
 package com.bkolomiets.planarryforum.theme.domain;
 
+import com.bkolomiets.planarryforum.comment.domain.Comment;
 import com.bkolomiets.planarryforum.user.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Borislav Kolomiets
@@ -36,4 +39,7 @@ public class Theme {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 }

@@ -3,7 +3,10 @@
     <head th:replace="/fragments/header :: head"></head>
     <body>
         <nav th:replace="/fragments/navbar :: navbar"></nav>
+
         <div class="container">
+            <h5>Add Theme</h5>
+
             <form method="post" th:action="@{/theme/add}">
                 <div class="form-group row">
                     <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>

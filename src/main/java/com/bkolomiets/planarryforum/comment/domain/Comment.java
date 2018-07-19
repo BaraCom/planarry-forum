@@ -29,10 +29,10 @@ public class Comment {
     @Column(name = "level_id")
     private Long levelId;
 
-    @Column(name = "parent_id", nullable = true)
+    @Column(name = "parent_id")
     private Long parentId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "theme_id")
     private Theme theme;
 

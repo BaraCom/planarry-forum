@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface IThemeRepository extends JpaRepository<Theme, Long> {
 
     Theme findByThemeTitle(final String title);
+
+//    void deleteByThemeTitle(final String title);
 }

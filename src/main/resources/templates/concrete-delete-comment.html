@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="/fragments/header :: head"></head>
+<head th:replace="/fragments/header :: head"></head>
     <body>
         <nav th:replace="/fragments/navbar :: navbar"></nav>
+
         <div class="container">
             <div>
                 <h1>POST</h1>
@@ -12,21 +13,13 @@
             </div>
 
             <div class="comments">
-                <div class="create-comment-div">
-                    <form method="post" th:action="@{/theme/{title}(title=${theme.getThemeTitle()})}">
-                        <textarea name="new-comment-text" placeholder="New comment"></textarea>
-                        <button type="submit">
-                            Add comment
-                        </button>
-                    </form>
-                </div>
-
                 <h1>Comments</h1>
+
                 <ul>
                     <li th:each="comment : ${comments}">
                         <div>
                             <div class="comment-title">
-                                <p class="title" th:text="${theme.getThemeTitle()}"></p>
+                                <p class="title" th:id="${'title-id-' + comment.getId()}" th:text="${theme.getThemeTitle()}"></p>
                                 <p class="author" th:text="${comment.getAuthor()}"></p>
                                 <p class="date" th:text="${comment.getDate()}"></p>
                             </div>
@@ -34,15 +27,11 @@
                                 <p class="inner-comment-text" th:text="${comment.getComment()}"></p>
                             </div>
                             <div class="comment-footer">
-                                <button class="reply-btn" th:id="${comment.getId()}">reply</button>
-                            </div>
-                            <div class="reply-comment-div">
-                                <form th:name="${comment.getId()}" class="reply-form" th:id="${comment.getId()}" style="display:none;"
-                                      method="post" th:action="@{/theme/{title}/{id}(title=${theme.getThemeTitle()}, id=${comment.getId()})}">
-                                    <textarea name="new-reply-comment" class="reply-comment"></textarea>
-                                    <button type="submit">
-                                        Add comment
+                                <form method="post" id="delete-comment-form" th:action="@{/comment/delete}">
+                                    <button th:id="${comment.getId()}" class="comment-delete-btn btn btn-success">
+                                        Delete
                                     </button>
+                                    <input name="delete-comment-id" type="hidden" id="comment-delete-theme-title" th:value="${comment.getId()}">
                                 </form>
                             </div>
                         </div>

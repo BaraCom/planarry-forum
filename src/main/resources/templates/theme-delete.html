@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/fragments/header :: head"></head>
+
+    <body>
+        <nav th:replace="/fragments/navbar :: navbar"></nav>
+        <div class="container">
+            <h5>Delete Theme</h5>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a th:each="theme : ${themes}" class="list-group-item list-group-item-action" th:id="${theme.getId()}" data-toggle="list"
+                           th:href="${'#delete-' + theme.getId()}" role="tab" th:aria-controls="${theme.getThemeTitle()}"
+                           th:text="${theme.getThemeTitle()}"></a>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="tab-content" id="nav-tabContent">
+                        <form id="delete-theme-form" method="post" th:action="@{/delete}">
+                            <div th:each="theme : ${themes}" class="tab-pane fade" th:id="${'delete-' + theme.getId()}"
+                                 role="tabpanel" th:aria-labelledby="${theme.getId()}">
+
+                                <p th:id="${'p-' + theme.getThemeTitle()}" th:text="${theme.getDescription()}"></p>
+                                <button th:id="${theme.getThemeTitle()}" type="submit" class="delete-btn btn btn-success"
+                                        data-toggle="modal" data-target="#theme-update-modal">
+
+                                    Delete
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

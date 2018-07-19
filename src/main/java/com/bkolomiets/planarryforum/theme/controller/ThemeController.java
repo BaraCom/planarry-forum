@@ -26,6 +26,7 @@ public class ThemeController {
     @GetMapping("/all")
     public String all(final Model model) {
         List<Theme> allThemes = themeService.getAll();
+
         model.addAttribute("themes", allThemes);
         model.addAttribute("nav", homeService.getNavBarByRole());
         model.addAttribute("isLogged", homeService.getLogButtonByRole());
@@ -39,10 +40,10 @@ public class ThemeController {
         model.addAttribute("nav", homeService.getNavBarByRole());
         model.addAttribute("isLogged", homeService.getLogButtonByRole());
 
-        Theme theme = themeService.getByTitle(title);
+        Theme theme = themeService.getThemeByTitle(title);
         model.addAttribute("theme", theme);
 
-        List<Comment> comments = commentService.getByTheme(theme);
+        List<Comment> comments = commentService.getCommentsByTheme(theme);
         model.addAttribute("comments", comments);
 
         return "concrete-theme";
@@ -52,8 +53,6 @@ public class ThemeController {
     public String addNewComment(@PathVariable("title") final String title
                               , @RequestParam("new-comment-text") final String newComment
                               , final Model model) {
-
-
         commentService.addNewComment(title, newComment);
 
         return getThemeByTitle(title, model);
@@ -86,5 +85,40 @@ public class ThemeController {
         themeService.addTheme(title, description);
 
         return "redirect:/theme/all";
+    }
+
+    @GetMapping("/update")
+    public String getUpdate(final Model model) {
+        List<Theme> allThemes = themeService.getAll();
+
+        model.addAttribute("themes", allThemes);
+        model.addAttribute("nav", homeService.getNavBarByRole());
+        model.addAttribute("isLogged", homeService.getLogButtonByRole());
+
+        return "theme-update";
+    }
+
+    @PostMapping("/update")
+    public String postUpdate(@RequestParam("theme-update-input") final String title, @RequestParam("edit-form") final String editTheme) {
+        themeService.saveEditTheme(title, editTheme);
+
+        return "redirect:/theme/update";
+    }
+
+    @GetMapping("/delete")
+    public String getDelete(final Model model) {
+        List<Theme> allThemes = themeService.getAll();
+        model.addAttribute("themes", allThemes);
+        model.addAttribute("nav", homeService.getNavBarByRole());
+        model.addAttribute("isLogged", homeService.getLogButtonByRole());
+
+        return "theme-delete";
+    }
+
+    @PostMapping("/delete/{title}")
+    public String postUpdate(@PathVariable("title") final String title) {
+        themeService.deleteThemeByTitle(title);
+
+        return "redirect:/theme/delete";
     }
 }

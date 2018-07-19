@@ -3,6 +3,11 @@ $(document).ready(function(){
     isEmptyLogInputsModal();
     isEmptyLogInputs();
     getReplyForm();
+
+    getThemeDescription();
+    createPathForThemeDeleteActionAttr();
+
+    getCommentUpdateModal();
 });
 
 function isEmptyRegInputs() {
@@ -72,5 +77,44 @@ function getReplyForm() {
         var idValue = $(this).attr('id');
 
         $("[name = '" + idValue +"']").attr('style', 'display:visible');
+    });
+}
+
+/*function createPathForThemeUpdateActionAttr() {
+    $('.update-btn').on('click', function () {
+        var title = $(this).attr('id');
+
+        // $('#update-theme-form').attr('action', '/theme/update/' + title);
+    });
+}*/
+
+function getThemeDescription() {
+    $('.update-btn').on('click', function () {
+        var themeTitle = $(this).attr('id');
+        var themeDescription = $('#p-' + themeTitle).text();
+
+        $('#theme-update-input').attr('value', themeTitle);
+        $('#update-modal-title').text(themeTitle + ' (theme edit)');
+        $('#modal-edit-theme').val(themeDescription);
+    });
+}
+
+function createPathForThemeDeleteActionAttr() {
+    $('.delete-btn').on('click', function () {
+        var title = $(this).attr('id');
+
+        $('#delete-theme-form').attr('action', '/theme/delete/' + title);
+    });
+}
+function getCommentUpdateModal() {
+    $('.comment-update-btn').on('click', function () {
+        var commentId = $(this).attr('id');
+        var commentValue = $('#update-comment-input-' + commentId).attr('value');
+        var themeTitle = $('#title-id-' + commentId).text();
+
+        $('#update-comment-modal-title').text(' (comment edit) ');
+        $('#modal-update-comment').val(commentValue);
+        $('#comment-update-id').attr('value', commentId);
+        $('#comment-update-theme-title').attr('value', themeTitle);
     });
 }

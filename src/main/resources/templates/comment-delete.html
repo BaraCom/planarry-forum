@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/header :: head"></head>
+    <body>
+        <nav th:replace="/fragments/navbar :: navbar"></nav>
+
+        <div class="container">
+            <h5>Delete Comment</h5>
+
+            <div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="theme : ${themes}">
+                        <a th:href="${'/comment/delete/' + theme.getThemeTitle()}" th:text="${theme.getThemeTitle()}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

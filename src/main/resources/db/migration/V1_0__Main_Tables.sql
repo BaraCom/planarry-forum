@@ -1,7 +1,7 @@
 create table comment (
   id        bigserial not null,
   author    varchar(255),
-  comment   varchar(255),
+  comment   varchar(2048),
   date      varchar(255),
   level_id  int8,
   parent_id int8,
@@ -13,7 +13,7 @@ primary key (id)
 create table theme (
   id          bigserial not null,
   date        varchar(255),
-  description varchar(255),
+  description varchar(2048),
   theme_title varchar(255),
   user_id     int8,
 

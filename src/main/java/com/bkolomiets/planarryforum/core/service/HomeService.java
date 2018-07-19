@@ -59,6 +59,14 @@ public class HomeService {
         map.put("/", "Home");
         map.put("/theme/add", "Add theme");
         map.put("/theme/update", "Edit theme");
+        map.put("/theme/delete", "Delete theme");
+
+        map.put("/comment/update", "Edit comment");
+        map.put("/comment/delete", "Delete comment");
+
+        map.put("/user/add", "Add user");
+        map.put("/user/update", "Edit user");
+        map.put("/user/delete", "Delete user");
 
         return map;
     }
@@ -66,6 +74,7 @@ public class HomeService {
     private Map<String, String> getAnonymousNavBar() {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("/", "Home");
+        map.put("/about", "About");
 
         return map;
     }
