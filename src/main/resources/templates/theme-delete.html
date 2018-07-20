@@ -3,14 +3,16 @@
     <head th:replace="/fragments/header :: head"></head>
 
     <body>
+        <div class="top-div"></div>
+
         <nav th:replace="/fragments/navbar :: navbar"></nav>
 
         <div class="container">
-            <h5>Delete Theme</h5>
+            <h5 class="delete-theme-title">Delete Theme</h5>
 
-            <div class="row">
+            <div class="row delete-theme-main-div">
                 <div class="col-4">
-                    <div class="list-group" id="list-tab" role="tablist">
+                    <div class="list-group delete-theme-list-div" id="list-tab" role="tablist">
                         <a th:each="theme : ${themes}" class="list-group-item list-group-item-action" th:id="${theme.getId()}" data-toggle="list"
                            th:href="${'#delete-' + theme.getId()}" role="tab" th:aria-controls="${theme.getThemeTitle()}"
                            th:text="${theme.getThemeTitle()}"></a>
@@ -23,9 +25,7 @@
                                  role="tabpanel" th:aria-labelledby="${theme.getId()}">
 
                                 <p th:id="${'p-' + theme.getThemeTitle()}" th:text="${theme.getDescription()}"></p>
-                                <button th:id="${theme.getThemeTitle()}" type="submit" class="delete-btn btn btn-success"
-                                        data-toggle="modal" data-target="#theme-update-modal">
-
+                                <button th:id="${theme.getThemeTitle()}" type="submit" class="delete-btn btn btn-success">
                                     Delete
                                 </button>
                             </div>

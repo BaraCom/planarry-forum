@@ -5,5 +5,5 @@ package com.bkolomiets.planarryforum.user.role;
  */
 public enum Role {
     ADMIN,
-    USER;
+    USER
 }

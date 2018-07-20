@@ -1,0 +1,7 @@
+Admin:
+    login         password
+    admin         1111
+
+DataBase (postgreSQL):
+    db                      schema
+    planarry-forum          forum

@@ -2,13 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="/fragments/header :: head"></head>
     <body>
+        <div class="top-div"></div>
+
         <nav th:replace="/fragments/navbar :: navbar"></nav>
 
         <div class="container">
+            <h5 class="all-theme-title">All Topics</h5>
+
             <div>
-                <ul class="list-group list-group-flush">
+                <ul class="all-theme-ul list-group list-group-flush">
                     <li class="list-group-item" th:each="theme : ${themes}">
-                        <a th:href="${theme.getThemeTitle()}" th:text="${theme.getThemeTitle()}"></a>
+                        <a class="theme-title-link" th:href="${theme.getThemeTitle()}" th:text="${theme.getThemeTitle()}"></a>
                     </li>
                 </ul>
             </div>

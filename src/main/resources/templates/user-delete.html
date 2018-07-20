@@ -2,30 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/header :: head"></head>
     <body>
+        <div class="top-div"></div>
+
         <nav th:replace="/fragments/navbar :: navbar"></nav>
 
         <div class="container">
-            <h5>Delete User</h5>
+            <h5 class="user-delete-title">Delete User</h5>
 
             <div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" th:each="user : ${users}">
+                <ul class="user-delete-ul list-group list-group-flush">
+                    <li class="user-delete-li list-group-item" th:each="user : ${users}">
                         <div>
                             <form method="post" th:action="@{/user/delete}">
                                 <input type="hidden" name="id" th:value="${user.getId()}">
-                                <label for="name" class="col-sm-2 col-form-label">Login</label>
+
+                                <label for="name" class="col-sm-2 col-form-label concrete-theme-desc-label">Login</label>
                                 <div class="col-sm-10">
-                                    <p id="name" th:text="${user.getUsername()}"></p>
+                                    <p class="concrete-theme-desc-p" id="name" th:text="${user.getUsername()}"></p>
                                 </div>
-                                <label for="password" class="col-sm-2 col-form-label">Password</label>
+
+                                <label for="password" class="col-sm-2 col-form-label concrete-theme-desc-label">Password</label>
                                 <div class="col-sm-10">
-                                    <p id="password" th:text="${user.getPassword()}"></p>
+                                    <p class="concrete-theme-desc-p" id="password" th:text="${user.getPassword()}"></p>
                                 </div>
-                                <label for="email" class="col-sm-2 col-form-label">e-Mail</label>
+
+                                <label for="email" class="col-sm-2 col-form-label concrete-theme-desc-label">e-Mail</label>
                                 <div class="col-sm-10">
-                                    <p id="email" th:text="${user.getEmail()}"></p>
+                                    <p class="concrete-theme-desc-p" id="email" th:text="${user.getEmail()}"></p>
                                 </div>
-                                <button type="submit" class="btn btn-success">
+
+                                <button type="submit" class="btn btn-secondary">
                                     Delete
                                 </button>
                             </form>

@@ -48,7 +48,8 @@ public class CommentController {
     }
 
     @PostMapping("/update")
-    public String postUpdate(@RequestParam("comment-update-id") final String commentId, @RequestParam("edit-comment-form") final String editComment) {
+    public String postUpdate(@RequestParam("comment-update-id") final String commentId
+                           , @RequestParam("edit-comment-form") final String editComment) {
         commentService.saveEditComment(commentId, editComment);
 
         return "redirect:/comment/update";
@@ -65,7 +66,7 @@ public class CommentController {
     }
 
     @GetMapping("/delete/{title}")
-    public String getDeleteByTitle(final Model model, @PathVariable("title") final String title) {
+    public String getDeleteByTitle(@PathVariable("title") final String title, final Model model) {
         model.addAttribute("nav", homeService.getNavBarByRole());
         model.addAttribute("isLogged", homeService.getLogButtonByRole());
 

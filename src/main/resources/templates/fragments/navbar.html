@@ -7,25 +7,27 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="nav">
-            <li class="nav-item" th:each="n : ${nav}">
-                <a class="nav-link active" th:href="${n.getKey()}" th:text="${n.getValue()}"></a>
+        <ul class="nav menu-point">
+            <li class="nav-item navbar-ul navbar-nav mr-auto" th:each="n : ${nav}">
+                <a class="nav-link active mx-2" th:href="${n.getKey()}" th:text="${n.getValue()}"></a>
             </li>
         </ul>
 
-        <div th:if="${isLogged}">
-            <h5 class="user-name form-inline mx-2 my-lg-0">
-                Hello, [[${#httpServletRequest.remoteUser}]]!
-            </h5>
-        </div>
-        <div th:if="${isLogged}">
-            <form th:replace="/fragments/logout :: loginout"></form>
-        </div>
-        <div th:if="${!isLogged}">
-            <a id="registration1" href="/registration">Registration</a>
-            <button data-toggle="modal" data-target="#exampleModalCenter" type="button" id="logBtn1" class="btn btn-sm btn-secondary">
-                Log in
-            </button>
+        <div class="welcome-message-block">
+            <div class="hello" th:if="${isLogged}">
+                <h5 class="user-name form-inline mx-2 my-lg-0">
+                    Hello, [[${#httpServletRequest.remoteUser}]]!
+                </h5>
+            </div>
+            <div th:if="${isLogged}">
+                <form th:replace="/fragments/logout :: loginout"></form>
+            </div>
+            <div class="log-btn" th:if="${!isLogged}">
+                <a id="registration1" href="/registration">Registration</a>
+                <button data-toggle="modal" data-target="#exampleModalCenter" type="button" id="logBtn1" class="btn btn-sm btn-secondary">
+                    Log in
+                </button>
+            </div>
         </div>
     </div>
 

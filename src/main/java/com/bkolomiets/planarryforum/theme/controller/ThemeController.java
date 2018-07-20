@@ -26,7 +26,6 @@ public class ThemeController {
     @GetMapping("/all")
     public String all(final Model model) {
         List<Theme> allThemes = themeService.getAll();
-
         model.addAttribute("themes", allThemes);
         model.addAttribute("nav", homeService.getNavBarByRole());
         model.addAttribute("isLogged", homeService.getLogButtonByRole());
@@ -63,7 +62,6 @@ public class ThemeController {
                                    , @PathVariable("id") final String id
                                    , @RequestParam("new-reply-comment") final String newReplyComment
                                    , final Model model) {
-
         if (!newReplyComment.equals("")) {
             commentService.addNewReplyComment(title, newReplyComment, id);
         }
@@ -90,7 +88,6 @@ public class ThemeController {
     @GetMapping("/update")
     public String getUpdate(final Model model) {
         List<Theme> allThemes = themeService.getAll();
-
         model.addAttribute("themes", allThemes);
         model.addAttribute("nav", homeService.getNavBarByRole());
         model.addAttribute("isLogged", homeService.getLogButtonByRole());

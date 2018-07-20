@@ -7,9 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-
 import javax.sql.DataSource;
 
 /**
@@ -27,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/img/**").permitAll()
-                .antMatchers("/", "/theme/all", "/registration").permitAll()
+                .antMatchers("/", "/theme/all", "/registration", "/about").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .formLogin()

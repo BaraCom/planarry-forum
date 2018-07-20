@@ -1,6 +1,5 @@
 package com.bkolomiets.planarryforum.user.domain;
 
-import com.bkolomiets.planarryforum.theme.domain.Theme;
 import com.bkolomiets.planarryforum.user.role.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -77,7 +77,6 @@ public class CommentService {
             for (int i = minNum; i < (maxNum + 1); i++) {
                 int oldCount = count;
                 for (Comment comment : byTheme) {
-
                     if (comment.getId() == count && comment.getLevelId() == 0L) {
                         sortedComments.add(comment);
 

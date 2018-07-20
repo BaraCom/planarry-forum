@@ -2,6 +2,8 @@ $(document).ready(function(){
     isEmptyRegInputs();
     isEmptyLogInputsModal();
     isEmptyLogInputs();
+    isEmptyThemeInputs();
+    isEmptyEditThemeModal();
     getReplyForm();
 
     getThemeDescription();
@@ -72,6 +74,35 @@ function isEmptyLogInputs() {
     });
 }
 
+function isEmptyThemeInputs() {
+    $('#add-new-theme').on('click', function () {
+        var title = $("#inputTitle").val();
+        var description = $("#themeDescription").val();
+
+        if (title.trim() === '') {
+            $('.modal-content-p').text('Pls, enter the title!');
+        } else if (description.trim() === '') {
+            $('.modal-content-p').text('Pls, enter the description!');
+        } else {
+            $('#add-new-theme').attr('data-toggle', '');
+            $('#add-new-theme').attr('data-target', '');
+            $('#add-new-theme').attr('type', 'submit');
+        }
+    });
+}
+
+function isEmptyEditThemeModal() {
+    $('#save-modal-edit-theme').on('click', function () {
+        var description = $("#modal-edit-theme").val();
+
+        if (description.trim() === '') {
+            $('#isEmpty').text('Pls, writing the theme!');
+        } else {
+            $('#save-modal-edit-theme').attr('type', 'submit');
+        }
+    });
+}
+
 function getReplyForm() {
     $('.reply-btn').on('click', function () {
         $('.reply-form').attr('style', 'display:none');
@@ -100,7 +131,6 @@ function createPathForThemeDeleteActionAttr() {
         $('#delete-theme-form').attr('action', '/theme/delete/' + title);
     });
 }
-
 function getCommentUpdateModal() {
     $('.comment-update-btn').on('click', function () {
         var commentId = $(this).attr('id');

@@ -1,17 +1,14 @@
 package com.bkolomiets.planarryforum.user.service;
 
-import com.bkolomiets.planarryforum.theme.domain.Theme;
 import com.bkolomiets.planarryforum.user.domain.User;
 import com.bkolomiets.planarryforum.user.repository.IUserRepository;
 import com.bkolomiets.planarryforum.user.role.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-
 import static java.lang.Math.toIntExact;
 import static java.util.Collections.singleton;
 

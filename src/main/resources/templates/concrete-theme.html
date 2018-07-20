@@ -2,47 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="/fragments/header :: head"></head>
     <body>
+        <div class="top-div"></div>
+
         <nav th:replace="/fragments/navbar :: navbar"></nav>
+
         <div class="container">
             <div>
-                <h1>POST</h1>
-                <p th:text="${theme.getThemeTitle()}"></p>
-                <p th:text="${theme.getCreationDate()}"></p>
-                <p th:text="${theme.getDescription()}"></p>
+                <h5 class="concrete-theme-title">Topic</h5>
+
+                <div class="concrete-theme-description">
+                    <label class="concrete-theme-desc-label">Topic name:</label>
+                    <p class="concrete-theme-desc-p" th:text="${theme.getThemeTitle()}"></p>
+
+                    <label class="concrete-theme-desc-label">Date:</label>
+                    <p class="concrete-theme-desc-p" th:text="${theme.getCreationDate()}"></p>
+
+                    <label class="concrete-theme-desc-label">Description:</label>
+                    <p class="concrete-theme-desc-p" th:text="${theme.getDescription()}"></p>
+                </div>
             </div>
 
             <div class="comments">
+                <h5 class="all-comments-title">Comments</h5>
+
                 <div class="create-comment-div">
                     <form method="post" th:action="@{/theme/{title}(title=${theme.getThemeTitle()})}">
-                        <textarea name="new-comment-text" placeholder="New comment"></textarea>
-                        <button type="submit">
+                        <textarea class="comment-text" name="new-comment-text" placeholder="New comment"></textarea>
+                        <button class="btn btn-outline-dark add-comment-btn-main" type="submit">
                             Add comment
                         </button>
                     </form>
                 </div>
 
-                <h1>Comments</h1>
-                <ul>
-                    <li th:each="comment : ${comments}">
+                <ul class="concrete-theme-ul">
+                    <li class="concrete-theme-li" th:each="comment : ${comments}">
                         <div>
                             <div class="comment-title">
-                                <p class="title" th:text="${theme.getThemeTitle()}"></p>
-                                <p class="author" th:text="${comment.getAuthor()}"></p>
-                                <p class="date" th:text="${comment.getDate()}"></p>
+                                <p class="title concrete-comment-title" th:text="${theme.getThemeTitle()}"></p>
+                                <p class="author concrete-comment-author" th:text="${comment.getAuthor()}"></p>
+                                <p class="date concrete-comment-date" th:text="${comment.getDate()}"></p>
                             </div>
-                            <div class="comment-text">
+                            <div>
                                 <p class="inner-comment-text" th:text="${comment.getComment()}"></p>
                             </div>
                             <div class="comment-footer">
-                                <button class="reply-btn" th:id="${comment.getId()}">reply</button>
+                                <button class="reply-btn btn btn-secondary" th:id="${comment.getId()}">
+                                    reply
+                                </button>
                             </div>
                             <div class="reply-comment-div">
                                 <form th:name="${comment.getId()}" class="reply-form" th:id="${comment.getId()}" style="display:none;"
                                       method="post" th:action="@{/theme/{title}/{id}(title=${theme.getThemeTitle()}, id=${comment.getId()})}">
-                                    <textarea name="new-reply-comment" class="reply-comment"></textarea>
-                                    <button type="submit">
-                                        Add comment
-                                    </button>
+                                    <div class="reply-comment-div">
+                                        <textarea name="new-reply-comment" class="comment-text reply-comment-text"></textarea>
+                                        <button class="add-reply-comment-btn btn btn-outline-dark" type="submit">
+                                            Add comment
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

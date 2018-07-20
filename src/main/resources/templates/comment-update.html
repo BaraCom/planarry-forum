@@ -2,15 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/header :: head"></head>
     <body>
+        <div class="top-div"></div>
+
         <nav th:replace="/fragments/navbar :: navbar"></nav>
 
         <div class="container">
-            <h5>Edit Comment</h5>
+            <h5 class="comment-update-title">Edit Comment</h5>
 
             <div>
-                <ul class="list-group list-group-flush">
+                <ul class="all-comments-ul list-group list-group-flush">
                     <li class="list-group-item" th:each="theme : ${themes}">
-                        <a th:href="${'/comment/update/' + theme.getThemeTitle()}" th:text="${theme.getThemeTitle()}"></a>
+                        <a class="comment-title-link" th:href="${'/comment/update/' + theme.getThemeTitle()}" th:text="${theme.getThemeTitle()}"></a>
                     </li>
                 </ul>
             </div>

@@ -2,15 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/header :: head"></head>
     <body>
+        <div class="top-div"></div>
+
         <nav th:replace="/fragments/navbar :: navbar"></nav>
 
         <div class="container">
             <!-- Modal -->
-            <div class="modal fade" id="theme-update-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="comment-update-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 id="update-comment-modal-title"></h5>
+                            <h5 class="update-theme-title-modal" id="update-comment-modal-title"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -21,7 +23,7 @@
                                 <input id="comment-update-id" name="comment-update-id" type="hidden" value="">
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="save-update-comment btn-secondary">
+                                <button type="submit" class="save-update-comment btn btn-secondary">
                                     Save
                                 </button>
                             </div>
@@ -30,29 +32,35 @@
                 </div>
             </div>
 
-            <div>
-                <h1>POST</h1>
-                <p th:text="${theme.getThemeTitle()}"></p>
-                <p th:text="${theme.getCreationDate()}"></p>
-                <p th:text="${theme.getDescription()}"></p>
+            <h5 class="concrete-comment-update-title">Topic</h5>
+
+            <div class="concrete-theme-description">
+                <label class="concrete-theme-desc-label">Topic name:</label>
+                <p class="concrete-theme-desc-p" th:text="${theme.getThemeTitle()}"></p>
+
+                <label class="concrete-theme-desc-label">Date:</label>
+                <p class="concrete-theme-desc-p" th:text="${theme.getCreationDate()}"></p>
+
+                <label class="concrete-theme-desc-label">Description:</label>
+                <p class="concrete-theme-desc-p" th:text="${theme.getDescription()}"></p>
             </div>
 
             <div class="comments">
-                <h1>Comments</h1>
+                <h5 class="all-comments-title">Comments</h5>
 
-                <ul>
-                    <li th:each="comment : ${comments}">
+                <ul class="comments-ul">
+                    <li class="concrete-theme-li" th:each="comment : ${comments}">
                         <div>
                             <div class="comment-title">
-                                <p class="title" th:id="${'title-id-' + comment.getId()}" th:text="${theme.getThemeTitle()}"></p>
-                                <p class="author" th:text="${comment.getAuthor()}"></p>
-                                <p class="date" th:text="${comment.getDate()}"></p>
+                                <p class="title concrete-comment-title" th:id="${'title-id-' + comment.getId()}" th:text="${theme.getThemeTitle()}"></p>
+                                <p class="author concrete-comment-author" th:text="${comment.getAuthor()}"></p>
+                                <p class="date concrete-comment-date" th:text="${comment.getDate()}"></p>
                             </div>
-                            <div class="comment-text">
+                            <div>
                                 <p class="inner-comment-text" th:text="${comment.getComment()}"></p>
                             </div>
                             <div class="comment-footer">
-                                <button th:id="${comment.getId()}" class="comment-update-btn btn btn-success" data-toggle="modal" data-target="#theme-update-modal">
+                                <button th:id="${comment.getId()}" class="comment-update-btn btn btn-success" data-toggle="modal" data-target="#comment-update-modal">
                                     Edit
                                 </button>
                                 <input th:id="${'update-comment-input-' + comment.getId()}" type="hidden" th:value="${comment.getComment()}">

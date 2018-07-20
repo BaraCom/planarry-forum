@@ -2,28 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/header :: head"></head>
     <body>
+        <div class="top-div"></div>
+
         <nav th:replace="/fragments/navbar :: navbar"></nav>
 
         <div class="container">
-            <div>
-                <h1>POST</h1>
-                <p th:text="${theme.getThemeTitle()}"></p>
-                <p th:text="${theme.getCreationDate()}"></p>
-                <p th:text="${theme.getDescription()}"></p>
+            <h5 class="concrete-comment-delete-title">Topic</h5>
+
+            <div class="concrete-theme-description">
+                <label class="concrete-theme-desc-label">Topic name:</label>
+                <p class="concrete-theme-desc-p" th:text="${theme.getThemeTitle()}"></p>
+
+                <label class="concrete-theme-desc-label">Date:</label>
+                <p class="concrete-theme-desc-p" th:text="${theme.getCreationDate()}"></p>
+
+                <label class="concrete-theme-desc-label">Description:</label>
+                <p class="concrete-theme-desc-p" th:text="${theme.getDescription()}"></p>
             </div>
 
             <div class="comments">
-                <h1>Comments</h1>
+                <h5 class="all-comments-title">Comments</h5>
 
-                <ul>
-                    <li th:each="comment : ${comments}">
+                <ul class="comments-ul">
+                    <li class="concrete-theme-li" th:each="comment : ${comments}">
                         <div>
                             <div class="comment-title">
-                                <p class="title" th:id="${'title-id-' + comment.getId()}" th:text="${theme.getThemeTitle()}"></p>
-                                <p class="author" th:text="${comment.getAuthor()}"></p>
-                                <p class="date" th:text="${comment.getDate()}"></p>
+                                <p class="title concrete-comment-title" th:id="${'title-id-' + comment.getId()}" th:text="${theme.getThemeTitle()}"></p>
+                                <p class="author concrete-comment-author" th:text="${comment.getAuthor()}"></p>
+                                <p class="date concrete-comment-date" th:text="${comment.getDate()}"></p>
                             </div>
-                            <div class="comment-text">
+                            <div>
                                 <p class="inner-comment-text" th:text="${comment.getComment()}"></p>
                             </div>
                             <div class="comment-footer">

@@ -2,25 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/header :: head"></head>
     <body>
+        <div class="top-div"></div>
+
         <nav th:replace="/fragments/navbar :: navbar"></nav>
 
         <div class="modal fade" id="theme-update-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 id="update-user-modal-title"></h5>
+                        <h5 class="update-user-title-modal" id="update-user-modal-title"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form id="update-user-form" method="post" th:action="@{/user/update}">
-                        <div >
-
-                            <input id="update-user-login" name="update-user-login" value="">
-                            <input id="update-user-password" name="update-user-password" value="">
-                            <input id="update-user-email" name="update-user-email" value="">
-                            <input type="hidden" id="update-user-old-login" name="update-user-old-login" value="">
-                            <input type="hidden" id="update-user-old-password" name="update-user-old-password" value="">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="update-user-login" class="col-sm-2 col-form-label">Login</label>
+                                <div class="col-sm-10">
+                                    <input name="update-user-login" type="text" class="login-input-modal form-control"
+                                           id="update-user-login" value="">
+                                    <p class="forLoginMessage"></p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="update-user-password" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input name="update-user-password" type="text" class="password-input-modal form-control"
+                                           id="update-user-password">
+                                    <p class="forPasswordMessage"></p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="update-user-email" class="col-sm-2 col-form-label">E-Mail</label>
+                                <div class="col-sm-10">
+                                    <input name="update-user-email" type="email" class="password-input-modal form-control"
+                                           id="update-user-email">
+                                    <p class="forPasswordMessage"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" id="" class="btn btn-secondary">
@@ -33,11 +53,11 @@
         </div>
 
         <div class="container">
-            <h5>Edit User</h5>
+            <h5 class="update-user-title">Edit User</h5>
 
-            <div class="row">
+            <div class="row update-theme-main-div">
                 <div class="col-4">
-                    <div class="list-group" id="list-tab" role="tablist">
+                    <div class="list-group update-theme-list-div" id="list-tab" role="tablist">
                         <a th:each="user : ${users}" class="list-group-item list-group-item-action" th:id="${user.getId()}" data-toggle="list"
                            th:href="${'#update-' + user.getId()}" role="tab" th:aria-controls="${user.getUsername()}"
                            th:text="${user.getUsername()}"></a>
