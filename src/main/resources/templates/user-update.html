@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/header :: head"></head>
+    <body>
+        <nav th:replace="/fragments/navbar :: navbar"></nav>
+
+        <div class="modal fade" id="theme-update-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="update-user-modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="update-user-form" method="post" th:action="@{/user/update}">
+                        <div >
+
+                            <input id="update-user-login" name="update-user-login" value="">
+                            <input id="update-user-password" name="update-user-password" value="">
+                            <input id="update-user-email" name="update-user-email" value="">
+                            <input type="hidden" id="update-user-old-login" name="update-user-old-login" value="">
+                            <input type="hidden" id="update-user-old-password" name="update-user-old-password" value="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="" class="btn btn-secondary">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h5>Edit User</h5>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a th:each="user : ${users}" class="list-group-item list-group-item-action" th:id="${user.getId()}" data-toggle="list"
+                           th:href="${'#update-' + user.getId()}" role="tab" th:aria-controls="${user.getUsername()}"
+                           th:text="${user.getUsername()}"></a>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div th:each="user : ${users}" class="tab-pane fade" th:id="${'update-' + user.getId()}"
+                             role="tabpanel" th:aria-labelledby="${user.getId()}">
+
+                            <p th:id="${'p-' + user.getUsername()}" th:text="${user.getPassword()}"></p>
+                            <p th:id="${'email-' + user.getUsername()}" th:text="${user.getEmail()}"></p>
+                            <input type="hidden" th:id="${'oldName' + user.getUsername() + user.getPassword()}" th:value="${user.getUsername()}">
+                            <input type="hidden" th:id="${'oldPassword' + user.getUsername() + user.getPassword()}" th:value="${user.getPassword()}">
+                            <button th:id="${user.getUsername()}" type="button" class="update-user-btn btn btn-success" data-toggle="modal" data-target="#theme-update-modal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

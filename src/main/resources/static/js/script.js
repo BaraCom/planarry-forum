@@ -8,6 +8,8 @@ $(document).ready(function(){
     createPathForThemeDeleteActionAttr();
 
     getCommentUpdateModal();
+
+    getUserDescription();
 });
 
 function isEmptyRegInputs() {
@@ -80,14 +82,6 @@ function getReplyForm() {
     });
 }
 
-/*function createPathForThemeUpdateActionAttr() {
-    $('.update-btn').on('click', function () {
-        var title = $(this).attr('id');
-
-        // $('#update-theme-form').attr('action', '/theme/update/' + title);
-    });
-}*/
-
 function getThemeDescription() {
     $('.update-btn').on('click', function () {
         var themeTitle = $(this).attr('id');
@@ -106,6 +100,7 @@ function createPathForThemeDeleteActionAttr() {
         $('#delete-theme-form').attr('action', '/theme/delete/' + title);
     });
 }
+
 function getCommentUpdateModal() {
     $('.comment-update-btn').on('click', function () {
         var commentId = $(this).attr('id');
@@ -116,5 +111,23 @@ function getCommentUpdateModal() {
         $('#modal-update-comment').val(commentValue);
         $('#comment-update-id').attr('value', commentId);
         $('#comment-update-theme-title').attr('value', themeTitle);
+    });
+}
+
+function getUserDescription() {
+    $('.update-user-btn').on('click', function () {
+        var userName = $(this).attr('id');
+        var password = $('#p-' + userName).text();
+        var email = $('#email-' + userName).text();
+        var oldName = $('#oldName' + userName + password).attr('value');
+        var oldPassword = $('#oldPassword' + userName + password).attr('value');
+
+
+        $('#update-user-login').attr('value', userName);
+        $('#update-user-modal-title').text(userName + ' (theme edit)');
+        $('#update-user-password').attr('value', password);
+        $('#update-user-email').attr('value', email);
+        $("#update-user-old-login").attr('value', oldName);
+        $("#update-user-old-password").attr('value', oldPassword);
     });
 }

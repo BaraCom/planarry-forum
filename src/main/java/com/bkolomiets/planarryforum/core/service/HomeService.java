@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
@@ -22,8 +23,8 @@ import static org.springframework.security.core.context.SecurityContextHolder.ge
 public class HomeService {
     private final UserService userService;
 
-    public void addUser(final User user) {
-        userService.addUser(user);
+    public void addUser(final String login, final String password, final String email) {
+        userService.addUser(login, password, email, "USER");
     }
 
     public Map<String, String> getNavBarByRole() {

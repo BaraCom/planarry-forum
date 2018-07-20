@@ -39,11 +39,8 @@ public class HomeController {
     public String postRegistration(@RequestParam("loginReg") final String login
                                  , @RequestParam("passwordReg") final String password
                                  , @RequestParam("emailReg") final String email) {
-        User user = new User(login, password, email);
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
 
-        homeService.addUser(user);
+        homeService.addUser(login, password, email);
 
         return "redirect:/login";
     }
