@@ -7,7 +7,7 @@
         <nav th:replace="/fragments/navbar :: navbar"></nav>
 
         <div class="container">
-            <h5 class="concrete-comment-delete-title">Topic</h5>
+            <h5 class="concrete-comment-delete-title">Delete Comment</h5>
 
             <div class="concrete-theme-description">
                 <label class="concrete-theme-desc-label">Topic name:</label>
@@ -40,6 +40,7 @@
                                         Delete
                                     </button>
                                     <input name="delete-comment-id" type="hidden" id="comment-delete-theme-title" th:value="${comment.getId()}">
+                                    <input name="delete-comment-theme-title" type="hidden" id="delete-comment-theme-title" th:value="${theme.getThemeTitle()}">
                                 </form>
                             </div>
                         </div>

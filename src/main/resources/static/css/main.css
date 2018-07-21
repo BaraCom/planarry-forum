@@ -16,34 +16,37 @@ body {
     width: 100%;
 }
 
-.menu-point {
-    margin-left: -15px;
+.navbar-brand {
+    color: #ff7332 !important;
+    font-weight: 600;
+}
+
+.welcome-message-block {
+    display: inline-flex;
+}
+
+.user-name, .form-inline {
+    margin-top: 7px !important;
 }
 
 .nav-link {
     color: #191919b0 !important;
+    display: inline;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 1px;
     transition: ease 0.5s;
+    border-bottom: 2px solid rgba(0, 107, 191, 0) !important;
 }
 
 .nav-link:hover {
     color: #ff7c3e !important;
-}
-
-.nav-item {
-    border-bottom: 2px solid rgba(0, 107, 191, 0) !important;
-    margin-right: 0 !important;
-}
-
-.nav-item:hover {
     border-bottom: 2px solid rgba(0,130,229,1) !important;
     transition: ease 0.5s;
 }
 
-.welcome-message-block {
-    display: contents;
+.nav-item {
+    padding: 4px 0;
 }
 
 .user-name {

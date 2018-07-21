@@ -10,21 +10,21 @@
                 </div>
                 <form method="post" th:action="@{/login}">
                     <div class="modal-body">
-                        <div class="form-group row">
-                            <label for="inputLogin" class="col-sm-2 col-form-label">Login</label>
-                            <div class="col-sm-10">
-                                <input name="username" type="text" class="login-input-modal form-control" id="inputLogin" placeholder="Login">
-                                <p class="forLoginMessage"></p>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input name="password" type="password" class="password-input-modal form-control" id="inputPassword" placeholder="Password">
-                                <p class="forPasswordMessage"></p>
-                            </div>
+                    <div class="form-group row">
+                        <label for="inputLogin" class="col-sm-2 col-form-label">Login</label>
+                        <div class="col-sm-10">
+                            <input name="username" type="text" class="login-input-modal form-control" id="inputLogin" placeholder="Login">
+                            <p class="forLoginMessage"></p>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input name="password" type="password" class="password-input-modal form-control" id="inputPassword" placeholder="Password">
+                            <p class="forPasswordMessage"></p>
+                        </div>
+                    </div>
+                </div>
                     <div class="modal-footer">
                         <a id="registration" href="/registration">Registration</a>
                         <button type="button" id="logBtnModal" class="btn btn-secondary">

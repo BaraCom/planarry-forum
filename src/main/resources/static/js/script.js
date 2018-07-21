@@ -6,7 +6,7 @@ $(document).ready(function(){
     isEmptyEditThemeModal();
     getReplyForm();
 
-    getThemeDescription();
+    getThemeUpdateModal();
     createPathForThemeDeleteActionAttr();
 
     getCommentUpdateModal();
@@ -113,7 +113,7 @@ function getReplyForm() {
     });
 }
 
-function getThemeDescription() {
+function getThemeUpdateModal() {
     $('.update-btn').on('click', function () {
         var themeTitle = $(this).attr('id');
         var themeDescription = $('#p-' + themeTitle).text();
@@ -131,6 +131,7 @@ function createPathForThemeDeleteActionAttr() {
         $('#delete-theme-form').attr('action', '/theme/delete/' + title);
     });
 }
+
 function getCommentUpdateModal() {
     $('.comment-update-btn').on('click', function () {
         var commentId = $(this).attr('id');

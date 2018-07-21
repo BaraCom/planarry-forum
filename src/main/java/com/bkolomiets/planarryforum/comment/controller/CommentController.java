@@ -49,10 +49,12 @@ public class CommentController {
 
     @PostMapping("/update")
     public String postUpdate(@RequestParam("comment-update-id") final String commentId
-                           , @RequestParam("edit-comment-form") final String editComment) {
+                           , @RequestParam("edit-comment-form") final String editComment
+                           , @RequestParam("comment-update-theme-title") final String themeTitle
+                           , final Model model) {
         commentService.saveEditComment(commentId, editComment);
 
-        return "redirect:/comment/update";
+        return getUpdateByTitle(themeTitle, model);
     }
 
     @GetMapping("/delete")
@@ -80,9 +82,11 @@ public class CommentController {
     }
 
     @PostMapping("/delete")
-    public String postDelete(@RequestParam("delete-comment-id") final String commentId) {
+    public String postDelete(@RequestParam("delete-comment-id") final String commentId
+                           , @RequestParam("delete-comment-theme-title") final String themeTitle
+                           , final Model model) {
         commentService.deleteComment(commentId);
 
-        return "redirect:/comment/delete";
+        return getDeleteByTitle(themeTitle, model);
     }
 }

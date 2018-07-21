@@ -18,7 +18,9 @@
                     <form id="update-user-form" method="post" th:action="@{/user/update}">
                         <div class="modal-body">
                             <div class="form-group row">
+                                <input type="hidden" name="update-user-old-login" id="update-user-old-login" value="">
                                 <label for="update-user-login" class="col-sm-2 col-form-label">Login</label>
+
                                 <div class="col-sm-10">
                                     <input name="update-user-login" type="text" class="login-input-modal form-control"
                                            id="update-user-login" value="">
@@ -26,7 +28,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <input type="hidden" name="update-user-old-password" id="update-user-old-password" value="">
                                 <label for="update-user-password" class="col-sm-2 col-form-label">Password</label>
+
                                 <div class="col-sm-10">
                                     <input name="update-user-password" type="text" class="password-input-modal form-control"
                                            id="update-user-password">
@@ -35,6 +39,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="update-user-email" class="col-sm-2 col-form-label">E-Mail</label>
+
                                 <div class="col-sm-10">
                                     <input name="update-user-email" type="email" class="password-input-modal form-control"
                                            id="update-user-email">
@@ -68,10 +73,18 @@
                         <div th:each="user : ${users}" class="tab-pane fade" th:id="${'update-' + user.getId()}"
                              role="tabpanel" th:aria-labelledby="${user.getId()}">
 
-                            <p th:id="${'p-' + user.getUsername()}" th:text="${user.getPassword()}"></p>
-                            <p th:id="${'email-' + user.getUsername()}" th:text="${user.getEmail()}"></p>
+                            <label for="update-user-login" class="col-sm-2 col-form-label concrete-theme-desc-label">Login:</label>
+                            <p th:id="${'login-' + user.getUsername()}" th:text="${user.getUsername()}" class="concrete-theme-desc-p"></p>
+
+                            <label for="update-user-password" class="col-sm-2 col-form-label concrete-theme-desc-label">Password:</label>
+                            <p th:id="${'p-' + user.getUsername()}" th:text="${user.getPassword()}" class="concrete-theme-desc-p"></p>
+
+                            <label for="update-user-email" class="col-sm-2 col-form-label concrete-theme-desc-label">E-Mail:</label>
+                            <p th:id="${'email-' + user.getUsername()}" th:text="${user.getEmail()}" class="concrete-theme-desc-p"></p>
+
                             <input type="hidden" th:id="${'oldName' + user.getUsername() + user.getPassword()}" th:value="${user.getUsername()}">
                             <input type="hidden" th:id="${'oldPassword' + user.getUsername() + user.getPassword()}" th:value="${user.getPassword()}">
+
                             <button th:id="${user.getUsername()}" type="button" class="update-user-btn btn btn-success" data-toggle="modal" data-target="#theme-update-modal">
                                 Edit
                             </button>

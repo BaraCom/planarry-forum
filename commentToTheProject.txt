@@ -5,3 +5,7 @@ Admin:
 DataBase (postgreSQL):
     db                      schema
     planarry-forum          forum
+
+
+
+I'm used Lombok. For his use, you needed install Lombok plugin to Intellij IDEA.

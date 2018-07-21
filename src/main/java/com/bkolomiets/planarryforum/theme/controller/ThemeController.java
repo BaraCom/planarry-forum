@@ -96,7 +96,8 @@ public class ThemeController {
     }
 
     @PostMapping("/update")
-    public String postUpdate(@RequestParam("theme-update-input") final String title, @RequestParam("edit-form") final String editTheme) {
+    public String postUpdate(@RequestParam("theme-update-input") final String title
+                           , @RequestParam("edit-form") final String editTheme) {
         themeService.saveEditTheme(title, editTheme);
 
         return "redirect:/theme/update";

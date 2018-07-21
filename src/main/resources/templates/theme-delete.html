@@ -10,17 +10,17 @@
         <div class="container">
             <h5 class="delete-theme-title">Delete Theme</h5>
 
-            <div class="row delete-theme-main-div">
-                <div class="col-4">
-                    <div class="list-group delete-theme-list-div" id="list-tab" role="tablist">
-                        <a th:each="theme : ${themes}" class="list-group-item list-group-item-action" th:id="${theme.getId()}" data-toggle="list"
-                           th:href="${'#delete-' + theme.getId()}" role="tab" th:aria-controls="${theme.getThemeTitle()}"
-                           th:text="${theme.getThemeTitle()}"></a>
+            <form id="delete-theme-form" method="post" th:action="@{/theme/delete}">
+                <div class="row update-theme-main-div">
+                    <div class="col-4">
+                        <div class="list-group update-theme-list-div" id="list-tab" role="tablist">
+                            <a th:each="theme : ${themes}" class="list-group-item list-group-item-action" th:id="${theme.getId()}" data-toggle="list"
+                               th:href="${'#delete-' + theme.getId()}" role="tab" th:aria-controls="${theme.getThemeTitle()}"
+                               th:text="${theme.getThemeTitle()}"></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-8">
-                    <div class="tab-content" id="nav-tabContent">
-                        <form id="delete-theme-form" method="post" th:action="@{/delete}">
+                    <div class="col-8">
+                        <div class="tab-content" id="nav-tabContent">
                             <div th:each="theme : ${themes}" class="tab-pane fade" th:id="${'delete-' + theme.getId()}"
                                  role="tabpanel" th:aria-labelledby="${theme.getId()}">
 
@@ -29,10 +29,10 @@
                                     Delete
                                 </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </body>
 </html>
